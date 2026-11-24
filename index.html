@@ -1,0 +1,766 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Indy Setup Guide &middot; CAMBY Ai</title>
+<meta name="description" content="Indy is a filmmaker for AI video. Set her up on Hermes Agent, give her your idea and your references, and get the look, three design sheets and a shot list with a prompt for every shot.">
+<meta name="theme-color" content="#0B0D12">
+<link rel="canonical" href="https://indy.mikecamby.com">
+<link rel="icon" href="camby-ai-logo-web.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CAMBY Ai">
+<meta property="og:title" content="Indy Setup Guide">
+<meta property="og:description" content="Indy is a filmmaker for AI video. Set her up on Hermes Agent, give her your idea and your references, and get the look, three design sheets and a shot list with a prompt for every shot.">
+<meta property="og:url" content="https://indy.mikecamby.com">
+<meta property="og:image" content="indy-avatar.jpg">
+<meta property="og:image:alt" content="Indy, filmmaker at CAMBY Ai">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1200">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Indy Setup Guide">
+<meta name="twitter:description" content="Indy is a filmmaker for AI video. Set her up on Hermes Agent, give her your idea and your references, and get the look, three design sheets and a shot list with a prompt for every shot.">
+<meta name="twitter:image" content="indy-avatar.jpg">
+<meta name="twitter:image:alt" content="Indy, filmmaker at CAMBY Ai">
+<style>
+  /* Layout: single column, left-aligned. Gold hairline rules separate numbered
+     sections, mirroring the CAMBY Ai site's "01 / SECTION" structure. */
+  :root {
+    --bg:        #0B0D12;
+    --panel:     #12161E;
+    --panel-2:   #171C26;
+    --line:      #2A2E3A;
+    --line-gold: #4A3B1E;
+    --gold:      #D8AA57;
+    --gold-dim:  #8A6E38;
+    --text:      #F7F3EB;
+    --muted:     #A49B89;
+    --ink:       #17191D;
+    --font-head: Georgia, "Times New Roman", serif;
+    --font-body: Arial, Helvetica, sans-serif;
+    --font-mono: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 920px;
+    margin: 0 auto;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-head); font-weight: normal; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(38px, 7vw, 68px); line-height: 1.05; letter-spacing: -0.015em; }
+  h2 { font-size: clamp(27px, 4.4vw, 40px); line-height: 1.15; letter-spacing: -0.01em; }
+  h3 { font-size: clamp(19px, 2.4vw, 23px); line-height: 1.3; }
+  h1 em, h2 em { color: var(--gold); font-style: italic; }
+  p { margin: 0; }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 0.19em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0;
+  }
+  .eyebrow .sep { color: var(--gold-dim); }
+
+  /* ---------- masthead ---------- */
+  .masthead {
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .masthead .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; flex-wrap: wrap; padding-block: 18px;
+  }
+  .masthead img { width: 168px; height: auto; display: block; }
+  .masthead .tag {
+    font-size: 11px; letter-spacing: 0.19em; text-transform: uppercase;
+    color: var(--muted); border-left: 1px solid var(--line-gold); padding-left: 14px;
+  }
+
+  /* ---------- hero ---------- */
+  .hero .wrap { padding-block: clamp(40px, 7vw, 76px); }
+  .hero-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(28px, 5vw, 56px); align-items: center; }
+  .hero-copy { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+  .lede { font-size: clamp(16px, 1.9vw, 18.5px); color: var(--muted); max-width: 54ch; }
+  .lede strong { color: var(--text); font-weight: normal; }
+
+  .portrait { position: relative; min-width: 0; }
+  .portrait img { width: 100%; max-width: 100%; height: auto; display: block; border: 1px solid var(--line-gold); }
+  .portrait figcaption {
+    margin-top: 12px; font-size: 11px; letter-spacing: 0.17em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .portrait figcaption b { color: var(--gold); font-weight: normal; }
+
+  .facts { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .fact { flex: 1 1 150px; min-width: 0; padding: 16px 18px 16px 0; }
+  .fact + .fact { border-left: 1px solid var(--line); padding-left: 18px; }
+  .fact dt { font-size: 10.5px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--muted); }
+  .fact dd { margin: 5px 0 0; font-family: var(--font-head); font-size: 21px; color: var(--gold); }
+
+  /* ---------- sections ---------- */
+  section { border-top: 1px solid var(--line); }
+  section .wrap { padding-block: clamp(36px, 5.5vw, 62px); }
+  .sec-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+  .sec-body { display: flex; flex-direction: column; gap: 20px; max-width: 68ch; }
+  .sec-body p { color: var(--muted); }
+  .sec-body p strong { color: var(--text); font-weight: bold; }
+
+  /* ---------- timeline table ---------- */
+  .scroll-x { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 440px; font-size: 15px; }
+  caption {
+    text-align: left; font-size: 11px; letter-spacing: 0.17em; text-transform: uppercase;
+    color: var(--muted); padding-bottom: 12px;
+  }
+  th, td { text-align: left; padding: 13px 16px 13px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-family: var(--font-body); font-size: 10.5px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--gold); font-weight: normal; }
+  td.when { color: var(--gold); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  td.what { color: var(--text); }
+  td.note { color: var(--muted); font-size: 14px; }
+  tr.heavy td.when { color: var(--text); background: var(--panel-2); padding-left: 12px; }
+
+  /* ---------- steps ---------- */
+  .step { display: grid; grid-template-columns: 62px 1fr; gap: 0 22px; padding-block: 30px; border-top: 1px solid var(--line); }
+  .step:first-of-type { border-top: 0; }
+  .step-num { font-family: var(--font-head); font-size: 34px; color: var(--gold-dim); line-height: 1; padding-top: 4px; font-variant-numeric: tabular-nums; }
+  .step-body { min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+  .step-body > p { color: var(--muted); max-width: 62ch; }
+  .step-body h3 em { color: var(--gold); font-style: italic; }
+
+  ul.ticks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  ul.ticks li { position: relative; padding-left: 20px; color: var(--muted); max-width: 62ch; }
+  ul.ticks li::before { content: ""; position: absolute; left: 0; top: 10px; width: 8px; height: 1px; background: var(--gold); }
+  ul.ticks li b { color: var(--text); font-weight: bold; }
+
+  /* ---------- code ---------- */
+  .code { border: 1px solid var(--line); background: var(--panel); }
+  .code-top {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 9px 12px; border-bottom: 1px solid var(--line); background: var(--panel-2);
+  }
+  .code-top span { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+  .copy {
+    font-family: var(--font-body); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase;
+    background: transparent; color: var(--gold); border: 1px solid var(--line-gold);
+    padding: 5px 11px; cursor: pointer;
+  }
+  .copy:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+  .copy:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  pre { margin: 0; padding: 14px; overflow-x: auto; font-family: var(--font-mono); font-size: 13.5px; line-height: 1.75; color: var(--text); }
+  pre .c { color: var(--gold-dim); }
+  code { font-family: var(--font-mono); font-size: 0.92em; color: var(--gold); }
+
+  /* ---------- callout ---------- */
+  .callout { border-left: 2px solid var(--gold); background: var(--panel); padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+  .callout .k { font-size: 10.5px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--gold); }
+  .callout p { color: var(--muted); max-width: 62ch; }
+
+  /* ---------- guardrails ---------- */
+  .rails { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .rail { background: var(--bg); padding: 20px; display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .rail dt { font-family: var(--font-head); font-size: 18px; color: var(--text); }
+  .rail dd { margin: 0; color: var(--muted); font-size: 14.5px; }
+  .rail .val { color: var(--gold); font-family: var(--font-mono); font-size: 13px; }
+
+  /* ---------- cta ---------- */
+  .cta { background: var(--panel); border-top: 1px solid var(--line-gold); }
+  .cta .wrap { padding-block: clamp(40px, 6vw, 68px); display: flex; flex-direction: column; gap: 24px; }
+  .cta-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(24px, 4vw, 48px); align-items: start; }
+  .contact { border: 1px solid var(--line-gold); padding: 22px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .contact .row { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+  .contact .row dt { font-size: 10.5px; letter-spacing: 0.17em; text-transform: uppercase; color: var(--muted); }
+  .contact .row dd { margin: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 0; }
+  .contact .v { font-family: var(--font-mono); font-size: 14.5px; color: var(--gold); word-break: break-all; }
+  a { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--line-gold); }
+  a:hover { border-bottom-color: var(--gold); }
+  a:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--line); }
+  footer .wrap { padding-block: 34px; display: flex; flex-direction: column; gap: 18px; }
+  footer img.sig { width: 150px; height: auto; opacity: 0.85; }
+  footer p { font-size: 13.5px; color: var(--muted); max-width: 70ch; }
+  .fine { font-size: 12px; color: var(--gold-dim); }
+
+  @media (max-width: 760px) {
+    .hero-grid, .cta-grid { grid-template-columns: 1fr; }
+    .portrait { max-width: 340px; }
+    .step { grid-template-columns: 1fr; gap: 12px; }
+    .step-num { font-size: 26px; padding-top: 0; }
+    .fact + .fact { border-left: 0; padding-left: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <img src="camby-ai-logo-web.png" alt="CAMBY Ai">
+    <div class="tag">Indy &middot; Setup Guide</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">00 <span class="sep">/</span> Filmmaker</p>
+        <h1>The software is free.<br><em>The references are the work.</em></h1>
+<p class="lede">Indy is a filmmaker for AI video. Most AI video looks generic because it starts at the wrong end: someone opens a video generator and types a sentence. Indy starts where a film crew starts, with references, and she will not write a single video prompt until the look, the character, the product and the location are designed on paper. She turns your idea into a reference list, a look, three design sheets and a shot list, and she writes the prompt for every shot so it is ready to paste. This guide sets her up on Hermes Agent, a free and open source agent from Nous Research that runs on your own machine.</p>
+<p class="lede">The software is free. The model behind it is not always free, and the real work is the idea and the references, which are yours.</p>
+<p class="fine"><strong>Checked on 2026-11-23.</strong> Commands and limits change. Sources are at the bottom.</p>
+<div class="callout">
+  <span class="k">How this guide was made:</span>
+  <p>every command below was copied from the Hermes Agent documentation on that date. We have not test-run them on a fresh machine. If a step does not behave the way it says, see "If a step breaks" near the end: your AI can patch it for you in a minute.</p>
+</div>
+<div class="callout">
+  <span class="k">Indy writes. You generate.</span>
+  <p>In this guide she does not connect to an image generator, a video generator or a reference library. She writes the plan and the prompts, and you paste them into the tools you already use.</p>
+</div>
+      </div>
+      <figure class="portrait">
+        <img src="indy-avatar.jpg" alt="Indy, filmmaker at CAMBY Ai" style="aspect-ratio:502 / 900; object-fit:cover; object-position:36% center;">
+        <figcaption><b>Indy</b> &middot; Action</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">01 <span class="sep">/</span> Before you start</p>
+      <h2>The honest timeline.<br><em>The slow part is the references.</em></h2>
+    </div>
+    <div class="sec-body">
+      <h3>What Indy does</h3>
+<ul class="ticks">
+  <li>Asks for your idea first and keeps it in one file. The idea comes from you. She does not invent it.</li>
+  <li>Builds a reference list: for each reference you describe, she records what is worth copying about it, the framing, the light, the lens and the color.</li>
+  <li>Gets specific. Where you wrote "cinematic", she asks which camera, which lens, which film stock, what time of day.</li>
+  <li>Sets the look from the location, because the place decides the color grade.</li>
+  <li>Designs before anything is generated: one sheet for the character, one for the product and one for the location.</li>
+  <li>Writes a shot list with a paste-ready image prompt for each shot, and the video prompt last, after the stills are approved.</li>
+  <li>Does not generate anything herself, and does not invent a brand, a client, a result or a price. You decide what gets made.</li>
+</ul>
+    </div>
+    <div class="step-body" style="margin-top:26px">
+<div class="scroll-x">
+  <table>
+    <caption>What you need before you start</caption>
+    <thead>
+      <tr><th scope="col">You need</th><th scope="col">Why</th><th scope="col">Cost</th><th scope="col">Checked</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="what">A computer: macOS, Linux, Windows or WSL2</td>
+        <td class="note">Hermes runs on it</td>
+        <td class="note">Yours already</td>
+        <td class="when">2026-11-23</td>
+      </tr>
+      <tr>
+        <td class="what">Git and curl</td>
+        <td class="note">The installer uses them</td>
+        <td class="note">Free</td>
+        <td class="when">2026-11-23</td>
+      </tr>
+      <tr>
+        <td class="what">Hermes Agent</td>
+        <td class="note">Runs Indy</td>
+        <td class="note">Free, MIT licence</td>
+        <td class="when">2026-11-23</td>
+      </tr>
+      <tr>
+        <td class="what">A model with at least 64,000 tokens of context</td>
+        <td class="note">Hermes rejects smaller models at startup</td>
+        <td class="note">Depends on the provider you pick. Not measured here</td>
+        <td class="when">2026-11-23</td>
+      </tr>
+      <tr>
+        <td class="what">One idea, in a paragraph</td>
+        <td class="note">Everything she writes starts from it</td>
+        <td class="note">Yours already</td>
+        <td class="when">2026-11-23</td>
+      </tr>
+      <tr>
+        <td class="what">References you have looked at yourself</td>
+        <td class="note">She works from what you tell her about them</td>
+        <td class="note">Depends on where you find them. Not measured here</td>
+        <td class="when">2026-11-23</td>
+      </tr>
+      <tr>
+        <td class="what">An image generator and a video generator</td>
+        <td class="note">She writes prompts for them. She does not run them</td>
+        <td class="note">Depends on the tools you pick. Not measured here</td>
+        <td class="when">2026-11-23</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p>On a brand new install the setup wizard may offer a "Free, start now" choice that needs no account. The Hermes docs say it is shown only when it is available, so do not plan around it.</p>
+<p>One thing to decide first: whatever model you choose will read what you put in her folder. Keep anything private out of it.</p>
+<p>References are for study. Describe a reference in your own words: the framing, the light, the lens, the color. Do not paste in or upload film stills you do not have the rights to, and do not ask a generator to copy one. You are borrowing a way of seeing, not a frame.</p>
+    </div>
+    <div class="step-body" style="margin-top:26px">
+<div class="scroll-x">
+  <table>
+    <caption>The honest timeline</caption>
+    <thead>
+      <tr><th scope="col">When</th><th scope="col">What</th><th scope="col">Your time</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="when">Day 1</td>
+        <td class="what">Install Hermes and get one normal chat working</td>
+        <td class="note">The Hermes docs say under 5 minutes. Allow 30</td>
+      </tr>
+      <tr>
+        <td class="when">Day 1</td>
+        <td class="what">Create Indy and give her a project folder</td>
+        <td class="note">20 minutes</td>
+      </tr>
+      <tr>
+        <td class="when">Day 1</td>
+        <td class="what">Write the idea and describe your references</td>
+        <td class="note">1 to 2 hours. This is the part that decides everything</td>
+      </tr>
+      <tr>
+        <td class="when">Day 2</td>
+        <td class="what">Have her write the look and the three sheets, and correct them</td>
+        <td class="note">1 hour</td>
+      </tr>
+      <tr>
+        <td class="when">Day 2</td>
+        <td class="what">Shot list and image prompts, then generate the stills yourself</td>
+        <td class="note">Depends on your tools</td>
+      </tr>
+      <tr>
+        <td class="when">Last</td>
+        <td class="what">Video prompts, only after the stills are right</td>
+        <td class="note">30 minutes, plus your generator's time</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<p>The slow part is not the install. It is finding references and saying exactly what you like about them. That is also the part no model can do for you.</p>
+<div class="callout">
+  <span class="k">Three limits to know before you start:</span>
+  <p>She only knows your references from what you write down. "Moody" gets you a generic result. A camera, a lens, a film stock and a time of day get you a specific one.</p>
+  <p>She does not see your images or your generated clips in this guide. You tell her what came back, and she adjusts the prompt.</p>
+  <p>She can make a prompt precise. She cannot make an idea good. That is yours.</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">02 <span class="sep">/</span> The build</p>
+      <h2>Seven steps.<br><em>In this order.</em></h2>
+    </div>
+
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h3>Install Hermes and get one chat working</h3>
+<p>Do not add anything else until a plain conversation works. The Hermes quickstart is blunt about this, and it is right.</p>
+<p>On macOS and Windows the Hermes docs recommend the Hermes Desktop installer from <a href="https://hermes-agent.nousresearch.com/">https:/<wbr>/<wbr>hermes-agent.nousresearch.com/<wbr></a>. For a command line only install on macOS, Linux or WSL2:</p>
+<div class="code">
+  <div class="code-top"><span>Terminal</span><button class="copy" type="button" data-copy="curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash">Copy</button></div>
+<pre>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash</pre>
+</div>
+<p>Reload your shell, pick a model, and start a chat:</p>
+<div class="code">
+  <div class="code-top"><span>Terminal</span><button class="copy" type="button" data-copy="source ~/.zshrc&#10;hermes setup&#10;hermes">Copy</button></div>
+<pre>source ~/.zshrc
+hermes setup
+hermes</pre>
+</div>
+<div class="callout">
+  <span class="k">You should see:</span>
+  <p>a welcome banner naming your model, and a reply to a simple question. If replies are empty or broken, run <code>hermes model</code> again and confirm the provider, the model and the login. If anything else looks off, run <code>hermes doctor</code>.</p>
+</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h3>Create Indy</h3>
+<p>Every agent in Hermes gets its own profile: its own settings, memory and identity. Never point two agents at the same profile.</p>
+<div class="code">
+  <div class="code-top"><span>Terminal</span><button class="copy" type="button" data-copy="hermes profile create indy --description &quot;Filmmaker for AI video. Starts from references, gets specific about camera, lens, film stock and light, sets the look from the location, designs character, product and location sheets, then writes a shot list with paste-ready image prompts and the video prompts last. Never generates anything herself and never invents the idea, a brand, a client, a result or a price.&quot;">Copy</button></div>
+<pre>hermes profile create indy --description "Filmmaker for AI video. Starts from references, gets specific about camera, lens, film stock and light, sets the look from the location, designs character, product and location sheets, then writes a shot list with paste-ready image prompts and the video prompts last. Never generates anything herself and never invents the idea, a brand, a client, a result or a price."</pre>
+</div>
+<p>Creating the profile also creates an <code>indy</code> command. Check it:</p>
+<div class="code">
+  <div class="code-top"><span>Terminal</span><button class="copy" type="button" data-copy="indy chat">Copy</button></div>
+<pre>indy chat</pre>
+</div>
+<div class="callout">
+  <span class="k">You should see:</span>
+  <p>the same kind of chat as step 1, now running as the <code>indy</code> profile.</p>
+</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h3>Give Indy her identity</h3>
+<p>In Hermes, who an agent is lives in a file called <code>SOUL.md</code> inside that agent's home. For a profile named <code>indy</code> that is:</p>
+<div class="code">
+  <div class="code-top"><span>~/.hermes/profiles/indy/SOUL.md</span><button class="copy" type="button" data-copy="~/.hermes/profiles/indy/SOUL.md">Copy</button></div>
+<pre>~/.hermes/profiles/indy/SOUL.md</pre>
+</div>
+<p>Hermes creates a starter file there. Replace its contents with the text in "Indy's instructions" below. Keep it about who she is and how she talks. Your idea and your references go in different files, in the next step.</p>
+<div class="callout">
+  <span class="k">You should see:</span>
+  <p>after starting a new <code>indy chat</code>, she introduces herself as your filmmaker when asked who she is.</p>
+</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <h3>Build her project folder: the rules, the idea and the references</h3>
+<p>This is the step everybody rushes, and it is the one that makes Indy useful. Make one folder per project.</p>
+<div class="code">
+  <div class="code-top"><span>Terminal</span><button class="copy" type="button" data-copy="mkdir -p ~/indy-projects/first-film/sheets ~/indy-projects/first-film/shots">Copy</button></div>
+<pre>mkdir -p ~/indy-projects/first-film/sheets ~/indy-projects/first-film/shots</pre>
+</div>
+<p>Put three files in it. Hermes loads <code>AGENTS.md</code> from the folder you start a chat in, and Indy reads the others as she works.</p>
+<p><code>~/indy-projects/first-film/AGENTS.md</code>, the rules:</p>
+<div class="code">
+  <div class="code-top"><span>~/indy-projects/first-film/AGENTS.md</span><button class="copy" type="button" data-copy="# How Indy works this project&#10;&#10;- idea.md is mine. Read it first, every time. Never change the idea. If it is unclear, ask me one question.&#10;- references.md is where everything starts. The output is only as good as the references. If it is empty or vague, stop and ask me for references before you write anything else.&#10;- Get specific. Never accept &quot;cinematic&quot;, &quot;moody&quot; or &quot;high quality&quot; from me or from yourself. Ask which camera, lens, film stock, time of day, light and color, and write the answer down.&#10;- The location sets the look. Write look.md from the location and the references: camera, lens, film stock, light, color grade and five colors in plain words. After I correct it, it is the source of truth for every prompt.&#10;- Design before generating. Write sheets/character.md, sheets/product.md and sheets/location.md before any shot. If a project has no product, say so in that sheet and move on.&#10;- Then write shots/shot-list.md: each shot with its framing, its lens, what moves, and a paste-ready image prompt that repeats the look from look.md word for word.&#10;- Video comes last. Do not write a video prompt for a shot until I tell you its still is approved.&#10;- Give every prompt as much context as it can hold: subject, place, time of day, light, lens, film stock, color, texture and what is in the foreground.&#10;- Never invent a brand, a client, a person&#x27;s name, a result or a price. If you do not know, write UNKNOWN and ask me once.&#10;- Describe references in words. Never ask me to upload a film still, and never write a prompt that asks a generator to copy a named film, a named director or a real person.&#10;- You write. You never generate, post or send anything. I paste the prompts into my own tools and tell you what came back.">Copy</button></div>
+<pre># How Indy works this project
+
+- idea.md is mine. Read it first, every time. Never change the idea. If it is unclear, ask me one question.
+- references.md is where everything starts. The output is only as good as the references. If it is empty or vague, stop and ask me for references before you write anything else.
+- Get specific. Never accept "cinematic", "moody" or "high quality" from me or from yourself. Ask which camera, lens, film stock, time of day, light and color, and write the answer down.
+- The location sets the look. Write look.md from the location and the references: camera, lens, film stock, light, color grade and five colors in plain words. After I correct it, it is the source of truth for every prompt.
+- Design before generating. Write sheets/character.md, sheets/product.md and sheets/location.md before any shot. If a project has no product, say so in that sheet and move on.
+- Then write shots/shot-list.md: each shot with its framing, its lens, what moves, and a paste-ready image prompt that repeats the look from look.md word for word.
+- Video comes last. Do not write a video prompt for a shot until I tell you its still is approved.
+- Give every prompt as much context as it can hold: subject, place, time of day, light, lens, film stock, color, texture and what is in the foreground.
+- Never invent a brand, a client, a person's name, a result or a price. If you do not know, write UNKNOWN and ask me once.
+- Describe references in words. Never ask me to upload a film still, and never write a prompt that asks a generator to copy a named film, a named director or a real person.
+- You write. You never generate, post or send anything. I paste the prompts into my own tools and tell you what came back.</pre>
+</div>
+<p><code>~/indy-projects/first-film/idea.md</code>, the idea. Fill it in yourself:</p>
+<div class="code">
+  <div class="code-top"><span>~/indy-projects/first-film/idea.md</span><button class="copy" type="button" data-copy="# The idea&#10;&#10;In one paragraph, what happens: {your idea, in your words}&#10;Who it is for: {the viewer}&#10;What they should feel at the end: {one feeling}&#10;How long: {seconds}&#10;Where it will be shown: {the platform and the shape, for example vertical 9:16}&#10;What must be in it: {a product, a place, a line, or nothing}&#10;What must not be in it: {anything off limits}">Copy</button></div>
+<pre># The idea
+
+In one paragraph, what happens: {your idea, in your words}
+Who it is for: {the viewer}
+What they should feel at the end: {one feeling}
+How long: {seconds}
+Where it will be shown: {the platform and the shape, for example vertical 9:16}
+What must be in it: {a product, a place, a line, or nothing}
+What must not be in it: {anything off limits}</pre>
+</div>
+<p><code>~/indy-projects/first-film/references.md</code>, the references. Add one block per reference, in your own words:</p>
+<div class="code">
+  <div class="code-top"><span>~/indy-projects/first-film/references.md</span><button class="copy" type="button" data-copy="# References&#10;&#10;## Reference 1&#10;Where I found it: {a reference library, a film I watched, a photo I took}&#10;What is in the frame: {subject, place, time of day}&#10;What I want to borrow: {the framing, the light, the lens, the color, the texture}&#10;Camera and lens, if listed: {or UNKNOWN}&#10;Film stock or format, if listed: {or UNKNOWN}&#10;Colors I see: {five colors in plain words}&#10;What I do not want from it: {anything to leave behind}">Copy</button></div>
+<pre># References
+
+## Reference 1
+Where I found it: {a reference library, a film I watched, a photo I took}
+What is in the frame: {subject, place, time of day}
+What I want to borrow: {the framing, the light, the lens, the color, the texture}
+Camera and lens, if listed: {or UNKNOWN}
+Film stock or format, if listed: {or UNKNOWN}
+Colors I see: {five colors in plain words}
+What I do not want from it: {anything to leave behind}</pre>
+</div>
+<div class="callout">
+  <span class="k">You should see:</span>
+  <p>when you run <code>indy chat</code> from inside the project folder and ask what the film looks like, she answers from your <code>references.md</code> and asks about anything you left vague.</p>
+</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">05</div>
+      <div class="step-body">
+        <h3>Write the look and the three sheets</h3>
+<p>Fill in <code>idea.md</code> and at least three references first. Then, from inside the project folder, run <code>indy chat</code> and send her this:</p>
+<div class="code">
+  <div class="code-top"><span>Send to Indy</span><button class="copy" type="button" data-copy="Read idea.md and references.md. First list every place where I was vague, and ask me about them one at a time until each has a specific answer. Then write look.md: camera, lens, film stock, light, color grade and five colors in plain words, all taken from the location and the references. Then write sheets/character.md, sheets/product.md and sheets/location.md. Each sheet says what it looks like, what it is made of, how the light falls on it, and three details a close-up would show. Use only what is in the files and what I tell you in this chat. Write UNKNOWN wherever you would have to guess.">Copy</button></div>
+<pre>Read idea.md and references.md. First list every place where I was vague, and ask me about them one at a time until each has a specific answer. Then write look.md: camera, lens, film stock, light, color grade and five colors in plain words, all taken from the location and the references. Then write sheets/character.md, sheets/product.md and sheets/location.md. Each sheet says what it looks like, what it is made of, how the light falls on it, and three details a close-up would show. Use only what is in the files and what I tell you in this chat. Write UNKNOWN wherever you would have to guess.</pre>
+</div>
+<div class="callout">
+  <span class="k">You should see:</span>
+  <p>a <code>look.md</code> that names real choices instead of adjectives, and three sheets that agree with it.</p>
+</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">06</div>
+      <div class="step-body">
+        <h3>Write the shot list and the image prompts</h3>
+<p>From inside the project folder, run <code>indy chat</code> and send her this:</p>
+<div class="code">
+  <div class="code-top"><span>Send to Indy</span><button class="copy" type="button" data-copy="Read idea.md, look.md and the three sheets. Write shots/shot-list.md. For each shot give: a number, how long it runs, the framing, the lens, what moves, and one paste-ready image prompt. Every image prompt repeats the look from look.md word for word and adds the subject, the place, the time of day, the light, the texture and what is in the foreground. Write no video prompts yet. End with the three shots I should generate first to test the look.">Copy</button></div>
+<pre>Read idea.md, look.md and the three sheets. Write shots/shot-list.md. For each shot give: a number, how long it runs, the framing, the lens, what moves, and one paste-ready image prompt. Every image prompt repeats the look from look.md word for word and adds the subject, the place, the time of day, the light, the texture and what is in the foreground. Write no video prompts yet. End with the three shots I should generate first to test the look.</pre>
+</div>
+<p>Generate those three stills yourself, in your own image tool. Tell her what came back, in words, and she will tighten the prompts.</p>
+<div class="callout">
+  <span class="k">You should see:</span>
+  <p>a numbered shot list where every prompt carries the same look, and no video prompts.</p>
+</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">07</div>
+      <div class="step-body">
+        <h3>Video prompts, last</h3>
+<p>When the stills are right, from inside the project folder run <code>indy chat</code> and send her this:</p>
+<div class="code">
+  <div class="code-top"><span>Send to Indy</span><button class="copy" type="button" data-copy="The stills for these shots are approved: {shot numbers}. For each one, write a video prompt that starts from that still: what moves, how the camera moves, how fast, and how it ends. Keep the look from look.md word for word. Change nothing else in shots/shot-list.md.">Copy</button></div>
+<pre>The stills for these shots are approved: {shot numbers}. For each one, write a video prompt that starts from that still: what moves, how the camera moves, how fast, and how it ends. Keep the look from look.md word for word. Change nothing else in shots/shot-list.md.</pre>
+</div>
+<div class="callout">
+  <span class="k">You should see:</span>
+  <p>video prompts only for the shots you named, each one starting from its approved still.</p>
+</div>
+      </div>
+    </div>
+
+    <div class="step-body" style="margin-top:26px">
+      <h3>Indy's instructions</h3>
+<p>Paste this into <code>~/.hermes/profiles/indy/SOUL.md</code>. Change the parts in braces.</p>
+<div class="code">
+  <div class="code-top"><span>~/.hermes/profiles/indy/SOUL.md</span><button class="copy" type="button" data-copy="# Who you are&#10;&#10;You are Indy. You are a filmmaker for {your business or your name}.&#10;&#10;You make AI video the way a film crew makes a film: references first, design second, generation last.&#10;&#10;# How you work&#10;&#10;- The output is only as good as the references. You start there, every time.&#10;- AI gives generic results when the brief is not specific. You get specific: camera, lens, film stock, light, color.&#10;- The location locks in the color grade. You set the look from the place.&#10;- If it can be put into words, it can be generated. You write it down precisely.&#10;- You design everything before any video is generated: character, product and location. Video generation comes at the end.&#10;- The more context a prompt has, the better. You give it all of it.&#10;- Good ideas come from the person, not the machine. The idea is your owner&#x27;s. You never replace it with your own.&#10;- You tell the truth. No invented brands, clients, results or prices.&#10;- You write and your owner generates. You never generate, post or send anything yourself.&#10;- When you do not know, you write UNKNOWN and ask once. You never guess.&#10;&#10;# How you talk&#10;&#10;- Relaxed and unhurried. A director who has done this before.&#10;- Dry, confident, plain. No hype.&#10;- Short sentences. Real film words, explained once if they are unusual.&#10;- When you ask a question, ask exactly one.">Copy</button></div>
+<pre># Who you are
+
+You are Indy. You are a filmmaker for {your business or your name}.
+
+You make AI video the way a film crew makes a film: references first, design second, generation last.
+
+# How you work
+
+- The output is only as good as the references. You start there, every time.
+- AI gives generic results when the brief is not specific. You get specific: camera, lens, film stock, light, color.
+- The location locks in the color grade. You set the look from the place.
+- If it can be put into words, it can be generated. You write it down precisely.
+- You design everything before any video is generated: character, product and location. Video generation comes at the end.
+- The more context a prompt has, the better. You give it all of it.
+- Good ideas come from the person, not the machine. The idea is your owner's. You never replace it with your own.
+- You tell the truth. No invented brands, clients, results or prices.
+- You write and your owner generates. You never generate, post or send anything yourself.
+- When you do not know, you write UNKNOWN and ask once. You never guess.
+
+# How you talk
+
+- Relaxed and unhurried. A director who has done this before.
+- Dry, confident, plain. No hype.
+- Short sentences. Real film words, explained once if they are unusual.
+- When you ask a question, ask exactly one.</pre>
+</div>
+<p>This persona was written from Indy's job description for this guide. It is not a copy of the instructions she runs on in our own team.</p>
+    </div>
+
+    <div class="step-body" style="margin-top:26px">
+      <h3>First test</h3>
+<p>Run <code>indy chat</code> from inside the project folder and send her this:</p>
+<div class="code">
+  <div class="code-top"><span>First test</span><button class="copy" type="button" data-copy="Using only idea.md and references.md, tell me in five lines: what happens, who it is for, where it takes place, what the light is doing, and which lens you would start on. Then list every word in my files that is too vague to generate from, and ask me about the first one. Use only what is in the files. Change nothing.">Copy</button></div>
+<pre>Using only idea.md and references.md, tell me in five lines: what happens, who it is for, where it takes place, what the light is doing, and which lens you would start on. Then list every word in my files that is too vague to generate from, and ask me about the first one. Use only what is in the files. Change nothing.</pre>
+</div>
+<p>A good answer stays inside your idea, names the vague words instead of working around them, and asks one question.</p>
+<p>If she rewrites your idea, or fills a gap with her own invention, tighten the "idea.md is mine" and "never invent" rules in <code>AGENTS.md</code> and ask her where it came from.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">03 <span class="sep">/</span> When it goes wrong</p>
+      <h2>If a step breaks.<br><em>You do not need us to fix it.</em></h2>
+    </div>
+<div class="scroll-x">
+  <table>
+    <caption>When it goes wrong</caption>
+    <thead>
+      <tr><th scope="col">What you see</th><th scope="col">Why</th><th scope="col">Fix</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="what">Empty or broken replies</td>
+        <td class="note">Model or login is wrong</td>
+        <td class="note"><code>hermes model</code>, then a plain chat before anything else</td>
+      </tr>
+      <tr>
+        <td class="what">She does not know your project</td>
+        <td class="note">The chat was not started in the project folder</td>
+        <td class="note">Start <code>indy chat</code> from that folder</td>
+      </tr>
+      <tr>
+        <td class="what">The stills look generic</td>
+        <td class="note">The references are vague, or the look is adjectives</td>
+        <td class="note">Add camera, lens, film stock, light and five colors to <code>references.md</code>, and rerun step 5</td>
+      </tr>
+      <tr>
+        <td class="what">Every shot looks like a different film</td>
+        <td class="note">The prompts are not repeating the look</td>
+        <td class="note">Tighten "repeats the look from look.md word for word" in <code>AGENTS.md</code> and rerun step 6</td>
+      </tr>
+      <tr>
+        <td class="what">She wrote video prompts too early</td>
+        <td class="note">The "video comes last" rule is being read loosely</td>
+        <td class="note">Delete them, and tighten that rule in <code>AGENTS.md</code></td>
+      </tr>
+      <tr>
+        <td class="what">She changed your idea</td>
+        <td class="note">She is improving instead of serving it</td>
+        <td class="note">Restore <code>idea.md</code>, and tighten the first rule in <code>AGENTS.md</code> and the "ideas come from the person" line in <code>SOUL.md</code></td>
+      </tr>
+      <tr>
+        <td class="what">A brand, name or number you never gave her</td>
+        <td class="note">She guessed</td>
+        <td class="note">Remove it, and tighten the "never invent" rule</td>
+      </tr>
+      <tr>
+        <td class="what">Anything else</td>
+        <td class="note"></td>
+        <td class="note"><code>hermes doctor</code></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+    <div class="step-body" style="margin-top:26px">
+      <h3>If a step breaks</h3>
+<p>Hermes changes fast, so a command here can drift from what your version expects. You do not need us to fix it. Paste this into Hermes itself, or into Claude or ChatGPT, with the error underneath:</p>
+<div class="code">
+  <div class="code-top"><span>Prompt</span><button class="copy" type="button" data-copy="I am following a setup guide for a filmmaking agent on Hermes Agent. This step failed. Here is the step, the exact command I ran, and the full error. Check the current Hermes Agent docs at https://hermes-agent.nousresearch.com/docs, tell me what changed, and give me the corrected command.">Copy</button></div>
+<pre>I am following a setup guide for a filmmaking agent on Hermes Agent. This step failed. Here is the step, the exact command I ran, and the full error. Check the current Hermes Agent docs at https://hermes-agent.nousresearch.com/docs, tell me what changed, and give me the corrected command.</pre>
+</div>
+<p><code>hermes doctor</code> is worth running first. It catches most setup problems on its own.</p>
+    </div>
+    <div class="step-body" style="margin-top:26px">
+      <h3>What it costs to run</h3>
+<ul class="ticks">
+  <li>Hermes Agent: free, MIT licence.</li>
+  <li>The model: billed by whichever provider you choose in <code>hermes model</code>. Every chat with Indy is model usage. Not measured here, so no number is given.</li>
+  <li>Reference libraries, image generators and video generators bill separately. This guide does not connect to any of them and gives no price for them.</li>
+</ul>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">04 <span class="sep">/</span> If you would rather not</p>
+      <h2>Want it set up<br><em>for you?</em></h2>
+    </div>
+    <div class="cta-grid">
+      <div class="sec-body">
+        <p>Nobody stalls on the install. They stall on finding references and saying what they like about them.</p>
+<p>CAMBY Ai sets Indy up and runs her for you: <a href="https://mikecamby.com">https:/<wbr>/<wbr>mikecamby.com</a></p>
+      </div>
+      <dl class="contact">
+        <div class="row">
+          <dt>Email</dt>
+          <dd><span class="v" id="v-email">mike@mikecamby.com</span>
+            <button class="copy" type="button" data-copy="mike@mikecamby.com">Copy</button></dd>
+        </div>
+        <div class="row">
+          <dt>Text</dt>
+          <dd><span class="v" id="v-phone">747.441.6578</span>
+            <button class="copy" type="button" data-copy="747.441.6578">Copy</button></dd>
+        </div>
+        <div class="row">
+          <dt>Book a time</dt>
+          <dd><a href="https://cal.com/mikecamby">cal.com/mikecamby</a></dd>
+        </div>
+        <div class="row">
+          <dt>The code</dt>
+          <dd><a href="https://github.com/NousResearch/hermes-agent">github.com/NousResearch/hermes-agent</a></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <img class="sig" src="camby-signature-web.png" alt="Camby">
+    <h3>Credit</h3>
+<p>Indy runs on <a href="https://github.com/NousResearch/hermes-agent">Hermes Agent</a>, built by Nous Research and released under the MIT licence. Hermes is not ours. This guide is a walkthrough for using it for AI video pre-production. Not affiliated with or endorsed by Nous Research or by any reference library, image generator or video generator.</p>
+    <h3>Sources</h3>
+<p>Hermes pages read on 2026-11-23 from the Hermes Agent repository and its documentation.</p>
+<ul class="ticks">
+  <li><a href="https://github.com/NousResearch/hermes-agent">https:/<wbr>/<wbr>github.com/<wbr>NousResearch/<wbr>hermes-agent</a> : install command, first-run commands, licence.</li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/getting-started/quickstart">https:/<wbr>/<wbr>hermes-agent.nousresearch.com/<wbr>docs/<wbr>getting-started/<wbr>quickstart</a> : install paths, <code>hermes setup</code>, <code>hermes model</code>, the 64,000 token minimum, the "Free, start now" option, <code>hermes doctor</code>.</li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/profiles">https:/<wbr>/<wbr>hermes-agent.nousresearch.com/<wbr>docs/<wbr>user-guide/<wbr>profiles</a> : <code>hermes profile create</code>, <code>--description</code>, one profile per agent, the per-profile command, where a profile's <code>SOUL.md</code> lives.</li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/personality">https:/<wbr>/<wbr>hermes-agent.nousresearch.com/<wbr>docs/<wbr>user-guide/<wbr>features/<wbr>personality</a> : <code>SOUL.md</code> and what belongs in it.</li>
+  <li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/which-file-does-what">https:/<wbr>/<wbr>hermes-agent.nousresearch.com/<wbr>docs/<wbr>user-guide/<wbr>which-file-does-what</a> : <code>SOUL.md</code> versus <code>AGENTS.md</code>, and that <code>AGENTS.md</code> loads from the working directory.</li>
+</ul>
+    <p class="fine">CAMBY Ai &middot; AI solutions for local businesses &middot; Las Vegas, Nevada &middot; More revenue. Less costs.</p>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll(".copy").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var text = btn.dataset.copy;
+      if (!text) {
+        var block = btn.closest(".code");
+        var pre = block && block.querySelector("pre");
+        if (!pre) return;
+        text = pre.innerText.replace(/[ \t]*#.*$/gm, "").trim();
+      }
+      var done = function () {
+        var prev = btn.textContent;
+        btn.textContent = "Copied";
+        setTimeout(function () { btn.textContent = prev; }, 1400);
+      };
+      try {
+        navigator.clipboard.writeText(text).then(done, function () { select(btn, text); });
+      } catch (e) {
+        select(btn, text);
+      }
+    });
+  });
+
+  function select(btn, text) {
+    var holder = btn.closest(".code") || btn.parentElement;
+    var target = holder && (holder.querySelector("pre") || holder.querySelector(".v"));
+    if (!target) return;
+    var range = document.createRange();
+    range.selectNodeContents(target);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    btn.textContent = "Select and copy";
+    setTimeout(function () { btn.textContent = "Copy"; }, 2200);
+  }
+</script>
+</body>
+</html>
